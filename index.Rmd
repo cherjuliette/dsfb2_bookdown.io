@@ -17,9 +17,8 @@ github-repo: cherjuliette/dsfb2_bookdown
 # Hi there!
 
 ## About Me
-I'm a Molecular Biologist with a passion for data science.
-
-Currently I'm looking for an internship that combines laboratory work with data science.
+I'm a Molecular Biologist with a passion for Data Science.
+My ultimate goal is to become a Data Scientist proficient in Bash, R and Python. 
 
 ## Future Ambitions
 
