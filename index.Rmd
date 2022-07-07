@@ -57,7 +57,7 @@ In addition to this, I will continue the project Gender Determination of the Cor
 
 
 + Learn how to use Python Pandas
-The language Python is widely used 
+The language Python is widely used in Data Science and how expand my ability to analyze data.
 
 <br>
 
@@ -83,11 +83,6 @@ This project is intended to help me fully and intrinsically understand R Shiny, 
 + Sentiment Analysis of Several Other Novels.
 
 This is also a short term goal however to get a better feel for this I will apply sentiment analysis in R to several other novels.
-
-Keywords: sentiment analysis, R
-Learn for to use Pandas from Python.
-
-Pandas is frequently used in data science and performs functions comparable to those found in R. To broaden my Data Scientist skills, I will learn how to use Pandas from Python.
 
 + Data Cleaning in SQL
 
