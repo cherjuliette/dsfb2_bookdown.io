@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Evaluating the global Dengue Fever and Flu cases in R | Cherin-Juliette | Portfolio</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Evaluating the global Dengue Fever and Flu cases in R | Cherin-Juliette | Portfolio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="cherjuliette/dsfb2_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Evaluating the global Dengue Fever and Flu cases in R | Cherin-Juliette | Portfolio" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+
+
+<meta name="date" content="2022-06-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="automating-peak-identification-using-r.html"/>
+<link rel="next" href="making-r-package-rcolorutrecht.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cherin-Juliette | Portfolio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hi there!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-me"><i class="fa fa-check"></i><b>1.1</b> About Me</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#future-ambitions"><i class="fa fa-check"></i><b>1.2</b> Future Ambitions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#months-goals"><i class="fa fa-check"></i><b>1.2.1</b> <strong>3 Months Goals</strong></a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#year-goals"><i class="fa fa-check"></i><b>1.2.2</b> <strong>1 Year Goals</strong></a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#years-goals"><i class="fa fa-check"></i><b>1.2.3</b> <strong>5 Years Goals</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#my-resume"><i class="fa fa-check"></i><b>1.3</b> My Resume</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#education"><i class="fa fa-check"></i><b>1.3.1</b> Education</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#research-experience"><i class="fa fa-check"></i><b>1.3.2</b> Research Experience</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#work-experience"><i class="fa fa-check"></i><b>1.3.3</b> Work Experience</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#honors-courses"><i class="fa fa-check"></i><b>1.3.4</b> Honors Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#expanding-my-skill-set"><i class="fa fa-check"></i><b>1.4</b> Expanding My Skill Set</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="reproducibility-in-data-science.html"><a href="reproducibility-in-data-science.html"><i class="fa fa-check"></i><b>2</b> Reproducibility in Data Science</a></li>
+<li class="chapter" data-level="3" data-path="dose-response-analysis-of-c.-elegans.html"><a href="dose-response-analysis-of-c.-elegans.html"><i class="fa fa-check"></i><b>3</b> Dose Response Analysis of C. elegans</a></li>
+<li class="chapter" data-level="4" data-path="data-file-management-using-the-guerilla-method.html"><a href="data-file-management-using-the-guerilla-method.html"><i class="fa fa-check"></i><b>4</b> Data &amp; File Management using the Guerilla Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-file-management-using-the-guerilla-method.html"><a href="data-file-management-using-the-guerilla-method.html#example"><i class="fa fa-check"></i><b>4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="automating-peak-identification-using-r.html"><a href="automating-peak-identification-using-r.html"><i class="fa fa-check"></i><b>5</b> Automating Peak Identification using R</a></li>
+<li class="chapter" data-level="6" data-path="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><i class="fa fa-check"></i><b>6</b> Evaluating the global Dengue Fever and Flu cases in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#conclusions-on-the-dengue-dataset"><i class="fa fa-check"></i><b>6.1</b> Conclusions on the dengue dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="making-r-package-rcolorutrecht.html"><a href="making-r-package-rcolorutrecht.html"><i class="fa fa-check"></i><b>7</b> Making R package rcolorUtrecht</a></li>
+<li class="chapter" data-level="8" data-path="evaluating-covid-19-cases-and-deaths.html"><a href="evaluating-covid-19-cases-and-deaths.html"><i class="fa fa-check"></i><b>8</b> Evaluating COVID-19 cases and deaths</a></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cherin-Juliette | Portfolio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="evaluating-the-global-dengue-fever-and-flu-cases-in-r" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Evaluating the global Dengue Fever and Flu cases in R<a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#evaluating-the-global-dengue-fever-and-flu-cases-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Google.org provides a number of datasets on Dengue Fever and flue cases. I downloaded two files that contained the number of dengue fever cases and flu cases which were already present in the GitHub repository of the course. These files provide cases from 2002 till 2015.</p>
+<p>I began my analysis with the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Manual download of the Dengue Fever dataset from the <a href="https://github.com/DataScienceILC/tlsc-dsfb26v-20_workflows">dsfb2 repository</a>.</li>
+<li>Manual download of the Flu Fever dataset from the <a href="https://github.com/DataScienceILC/tlsc-dsfb26v-20_workflows">dsfb2 repository</a>.</li>
+<li>Clean and tidy the data</li>
+<li>Write the data away in the folder data</li>
+<li>Make a SQL database of the data using RPostgreSQL</li>
+<li>Data visualization</li>
+<li>Conclusion</li>
+</ol>
+<p><strong>Data import of Dengue dataset</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;raw_data/007_dengue.csv&quot;</span>),</span>
+<span id="cb16-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                   </span>
+<span id="cb16-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb16-3" aria-hidden="true" tabindex="-1"></a>                   <span class="do">## ignores the rows containing metadata</span></span>
+<span id="cb16-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb16-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<p><strong>Data import of the Flu dataset</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;raw_data/007_flu.csv&quot;</span>),</span>
+<span id="cb17-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                <span class="do">## ignore rows with metadata</span></span>
+<span id="cb17-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">skip =</span> <span class="dv">11</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_builtin</span>(<span class="st">&quot;gapminder&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">## inspect the datasets</span></span>
+<span id="cb19-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb19-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(gapminder)</span></code></pre></div>
+<pre><code>## Rows: 10,545
+## Columns: 9
+## $ country          &lt;fct&gt; &quot;Albania&quot;, &quot;Algeria&quot;, &quot;Angola&quot;, &quot;Antigua and Barbuda&quot;…
+## $ year             &lt;int&gt; 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960, 1960,…
+## $ infant_mortality &lt;dbl&gt; 115.40, 148.20, 208.00, NA, 59.87, NA, NA, 20.30, 37.…
+## $ life_expectancy  &lt;dbl&gt; 62.87, 47.50, 35.98, 62.97, 65.39, 66.86, 65.66, 70.8…
+## $ fertility        &lt;dbl&gt; 6.19, 7.65, 7.32, 4.43, 3.11, 4.55, 4.82, 3.45, 2.70,…
+## $ population       &lt;dbl&gt; 1636054, 11124892, 5270844, 54681, 20619075, 1867396,…
+## $ gdp              &lt;dbl&gt; NA, 13828152297, NA, NA, 108322326649, NA, NA, 966778…
+## $ continent        &lt;fct&gt; Europe, Africa, Africa, Americas, Americas, Asia, Ame…
+## $ region           &lt;fct&gt; Southern Europe, Northern Africa, Middle Africa, Cari…</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(dengue)</span></code></pre></div>
+<pre><code>## Rows: 659
+## Columns: 11
+## $ Date        &lt;date&gt; 2002-12-29, 2003-01-05, 2003-01-12, 2003-01-19, 2003-01-2…
+## $ Argentina   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 0.046, 0.048, 0.051, 0.051, 0.…
+## $ Bolivia     &lt;dbl&gt; 0.101, 0.143, 0.176, 0.173, 0.146, 0.160, 0.225, 0.109, 0.…
+## $ Brazil      &lt;dbl&gt; 0.073, 0.098, 0.119, 0.170, 0.138, 0.202, 0.179, 0.239, 0.…
+## $ India       &lt;dbl&gt; 0.062, 0.047, 0.051, 0.032, 0.040, 0.038, 0.019, 0.008, 0.…
+## $ Indonesia   &lt;dbl&gt; 0.101, 0.039, 0.059, 0.039, 0.112, 0.049, 0.060, 0.039, 0.…
+## $ Mexico      &lt;dbl&gt; NA, NA, 0.071, 0.052, 0.048, 0.041, 0.042, 0.049, 0.054, 0…
+## $ Philippines &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 0.059,…
+## $ Singapore   &lt;dbl&gt; 0.059, 0.059, 0.238, 0.175, 0.164, 0.163, 0.150, 0.144, 0.…
+## $ Thailand    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Venezuela   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 0.139, 0.137, 0.168, 0.169, 0.…</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(flu)</span></code></pre></div>
+<pre><code>## Rows: 659
+## Columns: 30
+## $ Date            &lt;date&gt; 2002-12-29, 2003-01-05, 2003-01-12, 2003-01-19, 2003-…
+## $ Argentina       &lt;dbl&gt; NA, NA, NA, NA, NA, 136, 145, 141, 135, 134, 136, 134,…
+## $ Australia       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Austria         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Belgium         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Bolivia         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, 426, 427, 460, 541, 54…
+## $ Brazil          &lt;dbl&gt; 174, 162, 174, 162, 131, 151, 184, 162, 194, 177, 223,…
+## $ Bulgaria        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Canada          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Chile           &lt;dbl&gt; NA, NA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 1, 2…
+## $ France          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Germany         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Hungary         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Japan           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Mexico          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Netherlands     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ `New Zealand`   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Norway          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Paraguay        &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Peru            &lt;dbl&gt; 329, 315, 314, 267, 241, 227, 250, 236, 274, 270, 312,…
+## $ Poland          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Romania         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, 664, 736, 740, 864, 824, 819, …
+## $ Russia          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ `South Africa`  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Spain           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Sweden          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Switzerland     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Ukraine         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ `United States` &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ Uruguay         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 105, 102, …</code></pre>
+<p><strong>Tidy data of the Flue dataset</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## tidy the dengue dataset</span></span>
+<span id="cb25-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Put all countries in 1 column, and the flu cases in 1 column</span></span>
+<span id="cb25-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> dengue <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## selecting all columns by hand is tedious</span></span>
+<span id="cb25-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Here i select column Argentia till Venezuela using :</span></span>
+<span id="cb25-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb25-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">cols =</span> Argentina<span class="sc">:</span>Venezuela,</span>
+<span id="cb25-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">&quot;Country&quot;</span>,</span>
+<span id="cb25-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_to =</span> <span class="st">&quot;dengue_cases&quot;</span></span>
+<span id="cb25-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-11" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb25-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="do">## tidy the flu dataset</span></span>
+<span id="cb25-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Put all countries in 1 column and cases in another column</span></span>
+<span id="cb25-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-15" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> flu <span class="sc">%&gt;%</span></span>
+<span id="cb25-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">pivot_longer</span>(</span>
+<span id="cb25-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-17" aria-hidden="true" tabindex="-1"></a>                                <span class="at">cols =</span> Argentina<span class="sc">:</span>Uruguay,</span>
+<span id="cb25-18"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-18" aria-hidden="true" tabindex="-1"></a>                                <span class="at">names_to =</span> <span class="st">&quot;Country&quot;</span>,</span>
+<span id="cb25-19"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-19" aria-hidden="true" tabindex="-1"></a>                                <span class="at">values_to =</span> <span class="st">&quot;flu_cases&quot;</span></span>
+<span id="cb25-20"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-20" aria-hidden="true" tabindex="-1"></a>                                )</span>
+<span id="cb25-21"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="do">## DENGUE</span></span>
+<span id="cb25-23"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="do">## split the column Date to three columns named Year, Month and Day</span></span>
+<span id="cb25-24"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-24" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Date,</span>
+<span id="cb25-25"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-25" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>))</span>
+<span id="cb25-26"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-27"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="do">## FLU</span></span>
+<span id="cb25-29"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="do">## split the column Date to three columns named Year, Month and Day</span></span>
+<span id="cb25-30"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-30" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> flu_tidy <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Date,</span>
+<span id="cb25-31"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-31" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Month&quot;</span>, <span class="st">&quot;Day&quot;</span>))</span>
+<span id="cb25-32"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="do">## correct data class for the flu dataset</span></span>
+<span id="cb25-34"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-34" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>Year)</span>
+<span id="cb25-35"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-35" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>Month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>Month)</span>
+<span id="cb25-36"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-36" aria-hidden="true" tabindex="-1"></a>flu_tidy<span class="sc">$</span>Day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(flu_tidy<span class="sc">$</span>Day)</span>
+<span id="cb25-37"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-38"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="do">## correct data class for the dengue dataset</span></span>
+<span id="cb25-39"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-39" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>Year)</span>
+<span id="cb25-40"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-40" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>Month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>Month)</span>
+<span id="cb25-41"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb25-41" aria-hidden="true" tabindex="-1"></a>dengue_tidy<span class="sc">$</span>Day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(dengue_tidy<span class="sc">$</span>Day)</span></code></pre></div>
+<p><strong>Save the clean and tidy data in a new CSV file using the write function</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## write the tidy data into a new file</span></span>
+<span id="cb26-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="do">## the location of the files will be in folder data</span></span>
+<span id="cb26-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="do">## write away the tidy flu dataset</span></span>
+<span id="cb26-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-5" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="sc">%&gt;%</span> <span class="fu">write.csv</span>(<span class="at">file =</span> <span class="st">&quot;./data/flu_tidy.csv&quot;</span>)</span>
+<span id="cb26-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="do">## write away the tidy dengue dataset</span></span>
+<span id="cb26-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-8" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="sc">%&gt;%</span> <span class="fu">write.csv</span>(<span class="at">file =</span> <span class="st">&quot;./data/dengue_tidy.csv&quot;</span>)</span>
+<span id="cb26-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">## write away the gapminder dataset</span></span>
+<span id="cb26-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-11" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> <span class="fu">write.csv</span>(<span class="at">file =</span> <span class="st">&quot;./data/gapminder.csv&quot;</span>)</span>
+<span id="cb26-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">## save the data in a RDS file also</span></span>
+<span id="cb26-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(gapminder, <span class="at">file =</span> <span class="st">&quot;./data/gapminder.rds&quot;</span>)</span>
+<span id="cb26-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(dengue_tidy, <span class="at">file =</span> <span class="st">&quot;./data/dengue_tidy.rds&quot;</span>)</span>
+<span id="cb26-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(flu_tidy, <span class="at">file =</span> <span class="st">&quot;./data/flu_tidy.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## exporting to DBeaver requires a password which is unique for all users</span></span>
+<span id="cb27-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="do">## for safety reasons I will be omitting this information</span></span>
+<span id="cb27-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="do">## this analysis is still reproducible if you copy the code and insert your own password</span></span>
+<span id="cb27-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">## export the new files into DBeaver using RPostgres</span></span>
+<span id="cb27-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-6" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
+<span id="cb27-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dbname =</span> <span class="st">&quot;workflowsdb&quot;</span>,</span>
+<span id="cb27-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
+<span id="cb27-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">port =</span> <span class="st">&quot;5432&quot;</span>,</span>
+<span id="cb27-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">user =</span> <span class="st">&quot;postgres&quot;</span>,</span>
+<span id="cb27-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">password =</span> <span class="st">&quot;2022&quot;</span>)</span>
+<span id="cb27-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;flu_tidy&quot;</span>, flu_tidy)</span>
+<span id="cb27-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;dengue_tidy&quot;</span>, dengue_tidy)</span>
+<span id="cb27-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;gapminder&quot;</span>, gapminder)</span>
+<span id="cb27-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb27-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Inspect the files in DBeaver</span></span>
+<span id="cb27-18"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="do">## SELECT dengue_cases, country </span></span>
+<span id="cb27-19"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="do">## FROM dengue tidy order </span></span>
+<span id="cb27-20"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="do">## BY dengue_cases asc</span></span>
+<span id="cb27-21"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="do">## SELECT dengue_cases, country </span></span>
+<span id="cb27-23"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="do">## FROM dengue tidy order </span></span>
+<span id="cb27-24"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="do">## BY dengue_cases desc</span></span>
+<span id="cb27-25"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="do">## do this for all 3 files.</span></span></code></pre></div>
+<p><strong>After inspecting the data in DBeaver, import the files back into R</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">## import the data into R again after inspecting in DBeaver</span></span>
+<span id="cb28-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="do">## using RPostgres</span></span>
+<span id="cb28-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb28-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(con, <span class="st">&quot;gapminder&quot;</span>)</span>
+<span id="cb28-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb28-4" aria-hidden="true" tabindex="-1"></a>dengue <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(con, <span class="st">&quot;dengue_tidy&quot;</span>)</span>
+<span id="cb28-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb28-5" aria-hidden="true" tabindex="-1"></a>flu <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(con, <span class="st">&quot;flu_tidy&quot;</span>)</span></code></pre></div>
+<p><strong>Data visualization</strong>
+Is the flu and dengue fever more prevalent in certain areas? Let’s check</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## clean variables names</span></span>
+<span id="cb29-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="do">## default option is snake case</span></span>
+<span id="cb29-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-3" aria-hidden="true" tabindex="-1"></a>flu_tidy <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(flu_tidy)</span>
+<span id="cb29-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-5" aria-hidden="true" tabindex="-1"></a>flu_1 <span class="ot">&lt;-</span> flu_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb29-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb29-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> flu_cases,</span>
+<span id="cb29-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> year)) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb29-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb29-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Evaluating the number of flu cases&quot;</span>,</span>
+<span id="cb29-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Have flu cases risen over the years?&quot;</span>,</span>
+<span id="cb29-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb29-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of flu cases&quot;</span>,</span>
+<span id="cb29-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: Course instructors&quot;</span>)</span>
+<span id="cb29-18"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Check per country</span></span>
+<span id="cb29-21"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb29-21" aria-hidden="true" tabindex="-1"></a>flu_1 <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>country)</span></code></pre></div>
+<p><img src="_main_files/figure-html/standard%20flu%20graph-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a>flu_1</span></code></pre></div>
+<p><img src="_main_files/figure-html/standard%20flu%20graph-2.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## clean variables names</span></span>
+<span id="cb31-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="do">## default option is snake case</span></span>
+<span id="cb31-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-3" aria-hidden="true" tabindex="-1"></a>dengue_tidy <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(dengue_tidy)</span>
+<span id="cb31-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-5" aria-hidden="true" tabindex="-1"></a>dengue_1 <span class="ot">&lt;-</span> dengue_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb31-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb31-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> dengue_cases,</span>
+<span id="cb31-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> year)) <span class="sc">+</span></span>
+<span id="cb31-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb31-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb31-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Evaluating the number of flu cases&quot;</span>,</span>
+<span id="cb31-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Have flu cases risen over the years?&quot;</span>,</span>
+<span id="cb31-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb31-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of flu cases&quot;</span>,</span>
+<span id="cb31-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: Course instructors&quot;</span>)</span>
+<span id="cb31-18"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="do">## let&#39;s see the difference between countries</span></span>
+<span id="cb31-20"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb31-20" aria-hidden="true" tabindex="-1"></a>dengue_1 <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>country)</span></code></pre></div>
+<p><img src="_main_files/figure-html/standard%20dengue%20graph-1.png" width="672" /></p>
+<p><strong>Conclusions on the flu dataset</strong>
+When considering the number of <strong>flu</strong> cases globally, we can see that the highest occurence of the flu is in Spain, followed by Canada and the US. In contrast, the lowest flu occurences are found in Sweden, followed by Chile and New Zealand.
+The reason for this is unknown. To establish significance we could do statistical testing.</p>
+<div id="conclusions-on-the-dengue-dataset" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Conclusions on the dengue dataset<a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#conclusions-on-the-dengue-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When looking at the graph that shows dengue occurrences, we can see that the highest number of cases are seen in Venezuele, followed by Indonesia and Brazil. Dengue fever develops after infection with the <em>Flaviviridae</em> virus carried by mosquitoes. These mosquitoes are more prevalent in countries with warmer climates, which might explain the high occurrences.</p>
+<p><strong>Let’s do some joins</strong>
+We can already tell a lot by standard visualization as displayed above, but we want to compare the two occurances.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-1" aria-hidden="true" tabindex="-1"></a>flu_dengue <span class="ot">&lt;-</span> <span class="fu">full_join</span>(flu_tidy, </span>
+<span id="cb32-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                        dengue_tidy, </span>
+<span id="cb32-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;year&quot;</span>), </span>
+<span id="cb32-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;_flu&quot;</span>, <span class="st">&quot;_dengue&quot;</span>))</span>
+<span id="cb32-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="do">## let&#39;s also join the data from the gapminder dataset with the flu and dengue dataset</span></span>
+<span id="cb32-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-7" aria-hidden="true" tabindex="-1"></a>gapminder_flu_dengue <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(flu_dengue, </span>
+<span id="cb32-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-8" aria-hidden="true" tabindex="-1"></a>                                   gapminder, </span>
+<span id="cb32-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, </span>
+<span id="cb32-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb32-10" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;year&quot;</span>))</span></code></pre></div>
+<p><strong>Visualize the cases of flu per country</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot occurrences of flu and dengue per region</span></span>
+<span id="cb33-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a>flu_country <span class="ot">&lt;-</span> gapminder_flu_dengue <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, </span>
+<span id="cb33-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> flu_cases,</span>
+<span id="cb33-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_rcolorUtrecht</span>(<span class="at">palette =</span> <span class="st">&quot;hu&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">## turn the x axis labels by a 45 degree angle</span></span>
+<span id="cb33-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, </span>
+<span id="cb33-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb33-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="do">## legend is unnecessary</span></span>
+<span id="cb33-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb33-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-14" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span> </span>
+<span id="cb33-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Explain the graph</span></span>
+<span id="cb33-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Flu cases per country&quot;</span>, </span>
+<span id="cb33-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb33-18"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb33-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Flu cases&quot;</span>)</span></code></pre></div>
+<p><strong>Visualize the cases of dengue fever per country</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a>dengue_country <span class="ot">&lt;-</span> gapminder_flu_dengue <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb34-3"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, </span>
+<span id="cb34-4"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> dengue_cases,</span>
+<span id="cb34-5"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb34-6"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb34-7"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">scale_fill_rcolorUtrecht</span>(<span class="at">palette =</span> <span class="st">&quot;hu&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-9"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-9" aria-hidden="true" tabindex="-1"></a>                  <span class="do">## turn the x axis label 45 degrees</span></span>
+<span id="cb34-10"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, </span>
+<span id="cb34-11"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-11" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb34-12"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-12" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-13"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-14"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-14" aria-hidden="true" tabindex="-1"></a>                  <span class="do">## explain the graph</span></span>
+<span id="cb34-15"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-15" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Cases of Dengue Fever per country&quot;</span>, </span>
+<span id="cb34-16"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb34-17"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb34-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> <span class="st">&quot;Cases of Dengue Fever&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(flu_country, dengue_country, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/together-1.png" width="672" /></p>
+<p><strong>Conclusions after joining</strong>
+Joining the dataset provides us with a singular object that contains data on all three diseases. This helps put things in perspective, but as we see in the graphs above, the conclusions previously drawn remains the same.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="automating-peak-identification-using-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="making-r-package-rcolorutrecht.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/007_dsfb2_dengue_flu.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

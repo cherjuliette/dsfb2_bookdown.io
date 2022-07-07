@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Reproducibility in Data Science | Cherin-Juliette | Portfolio</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Reproducibility in Data Science | Cherin-Juliette | Portfolio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="cherjuliette/dsfb2_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Reproducibility in Data Science | Cherin-Juliette | Portfolio" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+
+
+<meta name="date" content="2022-06-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="dose-response-analysis-of-c.-elegans.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cherin-Juliette | Portfolio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Hi there!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#about-me"><i class="fa fa-check"></i><b>1.1</b> About Me</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#future-ambitions"><i class="fa fa-check"></i><b>1.2</b> Future Ambitions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#months-goals"><i class="fa fa-check"></i><b>1.2.1</b> <strong>3 Months Goals</strong></a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#year-goals"><i class="fa fa-check"></i><b>1.2.2</b> <strong>1 Year Goals</strong></a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#years-goals"><i class="fa fa-check"></i><b>1.2.3</b> <strong>5 Years Goals</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#my-resume"><i class="fa fa-check"></i><b>1.3</b> My Resume</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#education"><i class="fa fa-check"></i><b>1.3.1</b> Education</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#research-experience"><i class="fa fa-check"></i><b>1.3.2</b> Research Experience</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#work-experience"><i class="fa fa-check"></i><b>1.3.3</b> Work Experience</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#honors-courses"><i class="fa fa-check"></i><b>1.3.4</b> Honors Courses</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#expanding-my-skill-set"><i class="fa fa-check"></i><b>1.4</b> Expanding My Skill Set</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="reproducibility-in-data-science.html"><a href="reproducibility-in-data-science.html"><i class="fa fa-check"></i><b>2</b> Reproducibility in Data Science</a></li>
+<li class="chapter" data-level="3" data-path="dose-response-analysis-of-c.-elegans.html"><a href="dose-response-analysis-of-c.-elegans.html"><i class="fa fa-check"></i><b>3</b> Dose Response Analysis of C. elegans</a></li>
+<li class="chapter" data-level="4" data-path="data-file-management-using-the-guerilla-method.html"><a href="data-file-management-using-the-guerilla-method.html"><i class="fa fa-check"></i><b>4</b> Data &amp; File Management using the Guerilla Method</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-file-management-using-the-guerilla-method.html"><a href="data-file-management-using-the-guerilla-method.html#example"><i class="fa fa-check"></i><b>4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="automating-peak-identification-using-r.html"><a href="automating-peak-identification-using-r.html"><i class="fa fa-check"></i><b>5</b> Automating Peak Identification using R</a></li>
+<li class="chapter" data-level="6" data-path="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><i class="fa fa-check"></i><b>6</b> Evaluating the global Dengue Fever and Flu cases in R</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html"><a href="evaluating-the-global-dengue-fever-and-flu-cases-in-r.html#conclusions-on-the-dengue-dataset"><i class="fa fa-check"></i><b>6.1</b> Conclusions on the dengue dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="making-r-package-rcolorutrecht.html"><a href="making-r-package-rcolorutrecht.html"><i class="fa fa-check"></i><b>7</b> Making R package rcolorUtrecht</a></li>
+<li class="chapter" data-level="8" data-path="evaluating-covid-19-cases-and-deaths.html"><a href="evaluating-covid-19-cases-and-deaths.html"><i class="fa fa-check"></i><b>8</b> Evaluating COVID-19 cases and deaths</a></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cherin-Juliette | Portfolio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reproducibility-in-data-science" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Reproducibility in Data Science<a href="reproducibility-in-data-science.html#reproducibility-in-data-science" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>At the institute for Life Sciences a dose response analysis was performed on the C. elegans. The effect of compounds Decane, Naphthalene and 2,6-diisopropylnaphthalene were the number of offspring. From the course instructors I have acquired a dataset which contains the number of offspring and the concentrations of the compounds. In R I visualize the effects using ggplot2.</p>
+<p>The main objective of the experiment was to establish whether the compounds Decane, Nephtalene and 2,6-diisopropylnaphthalene causes a decrease in the number of offpsring seen in the C. elegans and if so, in what concentrations. Ethanol was used as a positive control, meaning the number of offspring will definitely drop when being exposed to it. S-medium was used as a negative control, which means nothing will happen when the C. elegans is exposed to it. 68 hours after exposure the number of offspring were counted under a microscope.</p>
+<p>In R, I loaded the dataset and inspected it. The column RawData contains the number of offspring after 68 hours of exposure to the compounds. The column compName shows the compound to which C. elegans was exposed to and lastly the column compConcentration shows the concentration of the compound.</p>
+<p>A problem I came across was that the column compConcentration was classified as a character rather than numeric. The reason for this is because the value separator was a comma instead of a fullstop. A way of changing is is by using the as.numeric function however that will result in values being removed. Alternatively, using the str_replace function works better and will not remove any values.</p>
+<ol style="list-style-type: decimal">
+<li>Load packages</li>
+<li>Data import</li>
+<li>Inspect data</li>
+<li>Clean data</li>
+<li>Tidy data</li>
+<li>Visualization</li>
+<li>Conclusions</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="reproducibility-in-data-science.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## import the data as a dataframe using read_xlsx</span></span>
+<span id="cb1-2"><a href="reproducibility-in-data-science.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## by default sheet1 will be imported</span></span>
+<span id="cb1-3"><a href="reproducibility-in-data-science.html#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(here<span class="sc">::</span><span class="fu">here</span>(</span>
+<span id="cb1-4"><a href="reproducibility-in-data-science.html#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;raw_data/CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="reproducibility-in-data-science.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## inspect the data</span></span>
+<span id="cb2-2"><a href="reproducibility-in-data-science.html#cb2-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(df)</span></code></pre></div>
+<pre><code>## Rows: 360
+## Columns: 34
+## $ plateRow            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ plateColumn         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ vialNr              &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1,…
+## $ dropCode            &lt;chr&gt; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, …
+## $ expType             &lt;chr&gt; &quot;experiment&quot;, &quot;experiment&quot;, &quot;experiment&quot;, &quot;experim…
+## $ expReplicate        &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
+## $ expName             &lt;chr&gt; &quot;CE.LIQ.FLOW.062&quot;, &quot;CE.LIQ.FLOW.062&quot;, &quot;CE.LIQ.FLOW…
+## $ expDate             &lt;dttm&gt; 2020-11-30, 2020-11-30, 2020-11-30, 2020-11-30, 2…
+## $ expResearcher       &lt;chr&gt; &quot;Sergio Reijnders - Ellis Herder&quot;, &quot;Sergio Reijnde…
+## $ expTime             &lt;dbl&gt; 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68…
+## $ expUnit             &lt;chr&gt; &quot;hour&quot;, &quot;hour&quot;, &quot;hour&quot;, &quot;hour&quot;, &quot;hour&quot;, &quot;hour&quot;, &quot;h…
+## $ expVolumeCounted    &lt;dbl&gt; 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50…
+## $ RawData             &lt;dbl&gt; 44, 37, 45, 47, 41, 35, 41, 36, 40, 38, 44, 48, 43…
+## $ compCASRN           &lt;chr&gt; &quot;24157-81-1&quot;, &quot;24157-81-1&quot;, &quot;24157-81-1&quot;, &quot;24157-8…
+## $ compName            &lt;chr&gt; &quot;2,6-diisopropylnaphthalene&quot;, &quot;2,6-diisopropylnaph…
+## $ compConcentration   &lt;chr&gt; &quot;4.99&quot;, &quot;4.99&quot;, &quot;4.99&quot;, &quot;4.99&quot;, &quot;4.99&quot;, &quot;4.99&quot;, &quot;4…
+## $ compUnit            &lt;chr&gt; &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;nM&quot;, &quot;n…
+## $ compDelivery        &lt;chr&gt; &quot;Liquid&quot;, &quot;Liquid&quot;, &quot;Liquid&quot;, &quot;Liquid&quot;, &quot;Liquid&quot;, …
+## $ compVehicle         &lt;chr&gt; &quot;controlVehicleA&quot;, &quot;controlVehicleA&quot;, &quot;controlVehi…
+## $ elegansStrain       &lt;chr&gt; &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N2&quot;, &quot;N…
+## $ elegansInput        &lt;dbl&gt; 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25…
+## $ bacterialStrain     &lt;chr&gt; &quot;OP50&quot;, &quot;OP50&quot;, &quot;OP50&quot;, &quot;OP50&quot;, &quot;OP50&quot;, &quot;OP50&quot;, &quot;O…
+## $ bacterialTreatment  &lt;chr&gt; &quot;heated&quot;, &quot;heated&quot;, &quot;heated&quot;, &quot;heated&quot;, &quot;heated&quot;, …
+## $ bacterialOD600      &lt;dbl&gt; 0.743, 0.743, 0.743, 0.743, 0.743, 0.743, 0.743, 0…
+## $ bacterialConcX      &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,…
+## $ bacterialVolume     &lt;dbl&gt; 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, …
+## $ bacterialVolUnit    &lt;chr&gt; &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;u…
+## $ incubationVial      &lt;chr&gt; &quot;1,5 glass vial&quot;, &quot;1,5 glass vial&quot;, &quot;1,5 glass via…
+## $ incubationVolume    &lt;dbl&gt; 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 10…
+## $ incubationUnit      &lt;chr&gt; &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;ul&quot;, &quot;u…
+## $ incubationMethod    &lt;chr&gt; &quot;rockroll&quot;, &quot;rockroll&quot;, &quot;rockroll&quot;, &quot;rockroll&quot;, &quot;r…
+## $ incubationRPM       &lt;dbl&gt; 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35…
+## $ bubble              &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ incubateTemperature &lt;dbl&gt; 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20…</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="reproducibility-in-data-science.html#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> compConcentration,</span>
+<span id="cb4-2"><a href="reproducibility-in-data-science.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> RawData,</span>
+<span id="cb4-3"><a href="reproducibility-in-data-science.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> compName,</span>
+<span id="cb4-4"><a href="reproducibility-in-data-science.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="reproducibility-in-data-science.html#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="reproducibility-in-data-science.html#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-7"><a href="reproducibility-in-data-science.html#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dose Response Reaction of</span><span class="sc">\n</span><span class="st">Decane, Nepthalane and 2,6-diisopropylnaphthalene&quot;</span>,</span>
+<span id="cb4-8"><a href="reproducibility-in-data-science.html#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">subtitle =</span> <span class="st">&quot;Data collected after 68 hours of dose response time&quot;</span>,</span>
+<span id="cb4-9"><a href="reproducibility-in-data-science.html#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">&quot;Compound concentration in nM&quot;</span>,</span>
+<span id="cb4-10"><a href="reproducibility-in-data-science.html#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">&quot;Number of offspring at 68 hours&quot;</span>,</span>
+<span id="cb4-11"><a href="reproducibility-in-data-science.html#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">&quot;Data source: J. Louter of the Institute of Life Sciences&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="reproducibility-in-data-science.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_rcolorUtrecht</span>(<span class="at">palette =</span> <span class="st">&quot;miffy&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/scatter%20plot-1.png" width="672" /></p>
+<p>This dataset was a good way to practice with data normalization considering the positively skewed plot. This makes the data difficult to read, which means I needed to do a log10 transformation.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="reproducibility-in-data-science.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the data is difficult to interpret</span></span>
+<span id="cb5-2"><a href="reproducibility-in-data-science.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## perform a log10 analysis on the compConcentration</span></span>
+<span id="cb5-3"><a href="reproducibility-in-data-science.html#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)),</span>
+<span id="cb5-4"><a href="reproducibility-in-data-science.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> RawData, </span>
+<span id="cb5-5"><a href="reproducibility-in-data-science.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> compName, </span>
+<span id="cb5-6"><a href="reproducibility-in-data-science.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">shape =</span> expType)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="reproducibility-in-data-science.html#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a href="reproducibility-in-data-science.html#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_jitter</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="reproducibility-in-data-science.html#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-10"><a href="reproducibility-in-data-science.html#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">scale_color_rcolorUtrecht</span>(<span class="at">palette =</span> <span class="st">&quot;miffy&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="reproducibility-in-data-science.html#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dose Response Reaction of</span><span class="sc">\n</span><span class="st">Decane, Nepthalane and 2,6-diisopropylnaphthalene&quot;</span>,</span>
+<span id="cb5-12"><a href="reproducibility-in-data-science.html#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">subtitle =</span> <span class="st">&quot;Data collected after 68 hours of dose response time&quot;</span>,</span>
+<span id="cb5-13"><a href="reproducibility-in-data-science.html#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> <span class="st">&quot;Compound concentration in nM&quot;</span>,</span>
+<span id="cb5-14"><a href="reproducibility-in-data-science.html#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> <span class="st">&quot;Number of offspring at 68 hours&quot;</span>,</span>
+<span id="cb5-15"><a href="reproducibility-in-data-science.html#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">caption =</span> <span class="st">&quot;Data source: J. Louter of the Institute of Life Sciences&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot2-1.png" width="672" /></p>
+<p>A log10 transformation helps with interpreting results. The higher the concentration, the less offspring is counted. After this, I normalized the data for the negative control. Why? To get a more relative view of the experiment. If I calculate the mean value for the negative control and then normalize those values, I can compare each data point with that normalized control. This way we may get a more relative conclusion of the plot.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="reproducibility-in-data-science.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## to make the results more relative</span></span>
+<span id="cb6-2"><a href="reproducibility-in-data-science.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="reproducibility-in-data-science.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## summarize the data of the negative control</span></span>
+<span id="cb6-4"><a href="reproducibility-in-data-science.html#cb6-4" aria-hidden="true" tabindex="-1"></a>ethanol_summary <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="reproducibility-in-data-science.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(compName, compConcentration) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="reproducibility-in-data-science.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">by =</span> <span class="st">&quot;compName&quot;</span>, </span>
+<span id="cb6-7"><a href="reproducibility-in-data-science.html#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(RawData, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-8"><a href="reproducibility-in-data-science.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="reproducibility-in-data-science.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## check the mean value of the ethanol values</span></span>
+<span id="cb6-10"><a href="reproducibility-in-data-science.html#cb6-10" aria-hidden="true" tabindex="-1"></a>ethanol <span class="ot">&lt;-</span> df<span class="sc">$</span>RawData[df<span class="sc">$</span>expType<span class="sc">==</span><span class="st">&quot;controlNegative&quot;</span>] <span class="sc">%&gt;%</span> <span class="fu">mean</span>()   <span class="do">##85.9</span></span>
+<span id="cb6-11"><a href="reproducibility-in-data-science.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="reproducibility-in-data-science.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## normalize the results for the negative control</span></span>
+<span id="cb6-13"><a href="reproducibility-in-data-science.html#cb6-13" aria-hidden="true" tabindex="-1"></a>ethanol_summary <span class="ot">&lt;-</span> ethanol_summary <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">normalized_mean =</span> mean <span class="sc">/</span> <span class="fl">85.9</span>)</span>
+<span id="cb6-14"><a href="reproducibility-in-data-science.html#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="reproducibility-in-data-science.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## and compare each value with this normalized data</span></span>
+<span id="cb6-16"><a href="reproducibility-in-data-science.html#cb6-16" aria-hidden="true" tabindex="-1"></a>ethanol_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb6-17"><a href="reproducibility-in-data-science.html#cb6-17" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> (<span class="fu">log10</span>(compConcentration <span class="sc">+</span> <span class="fl">0.001</span>)), </span>
+<span id="cb6-18"><a href="reproducibility-in-data-science.html#cb6-18" aria-hidden="true" tabindex="-1"></a>                              <span class="at">y =</span> normalized_mean, </span>
+<span id="cb6-19"><a href="reproducibility-in-data-science.html#cb6-19" aria-hidden="true" tabindex="-1"></a>                              <span class="at">colour =</span> compName, </span>
+<span id="cb6-20"><a href="reproducibility-in-data-science.html#cb6-20" aria-hidden="true" tabindex="-1"></a>                              <span class="at">shape =</span> compName)) <span class="sc">+</span></span>
+<span id="cb6-21"><a href="reproducibility-in-data-science.html#cb6-21" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-22"><a href="reproducibility-in-data-science.html#cb6-22" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-23"><a href="reproducibility-in-data-science.html#cb6-23" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dose Response Reaction of</span><span class="sc">\n</span><span class="st">Decane, Nepthalane and 2,6-diisopropylnaphthalene&quot;</span>,</span>
+<span id="cb6-24"><a href="reproducibility-in-data-science.html#cb6-24" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x =</span> <span class="st">&quot;Compound concentration in nM&quot;</span>,</span>
+<span id="cb6-25"><a href="reproducibility-in-data-science.html#cb6-25" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y =</span> <span class="st">&quot;Number of offspring&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-26"><a href="reproducibility-in-data-science.html#cb6-26" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb6-27"><a href="reproducibility-in-data-science.html#cb6-27" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">scale_color_rcolorUtrecht</span>(<span class="at">palette =</span> <span class="st">&quot;miffy&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/normalize%20negative%20control-1.png" width="672" />
+What can be concluded from this graph is that with increasing concentrations the number of offspring also drop. However what we can see now, what we couldn’t before is that Naphthalene shows the most severe drop in offspring, becoming more severe with higher concentrations.</p>
+<p>This is a predictable conclusion, but also has shortcomings because it says little about the IC50 and EC50. A way to establish a conclusion on these factors would be to use the drc package.</p>
+<p>See my source code in file named 001_dsfb2_celegans.Rmd.
+The data file is named CE.LIQ.FLOW.062_Tidydata.xlsx and may be found in the folder raw_data.</p>
+<p>To understand how I applied the Guerilla Method to manage my files, take a look at my article Data &amp; File management</p>
+<p><strong>References:</strong>
+<br>
+<a href="https://www.youtube.com/watch?v=zjqLwPgLnV0">A Brief Introduction to C. elegans</a>
+C. elegans dataset provided by the course instructors, however the experiment was conducted by J. Louter.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dose-response-analysis-of-c.-elegans.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/001_2_dsfb2_celegans.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
