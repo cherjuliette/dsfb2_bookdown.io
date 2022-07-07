@@ -34,22 +34,20 @@ Previously during my studies I did a project on the laboratory which included mu
 
 <br>
 
-+ Sentiment Analysis of All Literature by Edgar Allan Poe
++ Sentiment Analysis of The Raven by Edgar Allan Poe
 
 This has been something which I have wanted to do for years. When studying literature the climax and denouement of a novel is determined by a specific undertone, however I wish to prove these segments with sentiment analysis.
 After all, as Heinrich von Schlegel said Every art should become science, and every science should become art.
 
 <br>
 
-+ Gender Determination of the Corvus Corax
-
-This was the last project I worked on before beginning the minor in Data Science. The commissioning party consisted of a group of birders who worked under the direction of a professor at my college.
-NO2 and isopropanol were used to extract DNA from feathers. The DNA was then amplified using a HotStart PCR and custom primers.
-Because the physical distinctions of the Corvus corax are difficult to identify when comparing genders, I will create a dataset in SQL and compare the phenotypes of the birds with the PCR results in R.
-
-This is an ongoing project however and therefore completion within the self-given timeframe is not viable.
++ R Shiny app to track my pet's health  
+My pet has a little vaccination notebook in which his medical history is stored. My pet is 8 years old now and the notebook has been lost for 6 years. While I care greatly for my pet's health I intend to make a R Shiny app that tracks his medical history, vaccination history and routine checkups.
 
 <br>
+
++ Learn the basics of Matlab  
+Recently I've landed my dream internship which will combine Data Science with genetics research. In this laboratory the programming language Matlab is widely used which necessitates me to learn at least the basics before I start.
 
 ### **1 Year Goals**
 This is the year I'll be doing an internship in a laboratory. In addition to expanding on my present knowledge with laboratory procedures, I intend to use this year to hone my Data Science skills.
@@ -58,11 +56,8 @@ How will I accomplish this? While data science is a flourishing field, not many 
 In addition to this, I will continue the project Gender Determination of the Corvus corax in R.
 
 
-+ Improving an extisting analysis in the laboratory in which I follow an internship.
-
-+ Gender Determination of the Corvus corax using PCR.
-
-+ I will do this by adding new found data to the existing SQL database and comparing the phenotype with the results acquired by PCR.
++ Learn how to use Python Pandas
+The language Python is widely used 
 
 <br>
 
