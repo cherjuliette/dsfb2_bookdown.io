@@ -1,0 +1,30 @@
+---
+bibliography: references.bib
+---
+
+# Automating Peak Identification using R
+
+The Naja Pallida snake is a native of Western Africa. When threatened, it shoots venom into the eyes of its adversary, briefly blinding them and giving them time to flee. This impact is explored in zoological laboratories. When a snake bites a human, little cloats form {@Bittenbinder2018}, which might cause the individual to die (ABC Science).
+
+The Institute for Life Sciences is well-known for its participation in snake venom research. This is because a previous pupil, Jory van Thiel, has been infatuated with snakes since he was a child. He once came to see us at college and told us about his fascination with snakes, how he acted in self-defense rather than malice, and how he even had his own pet snake. During his travels to Asia a snake spat venom in his eyes which blinded him temporarily and made him understand the defence mechanism of the Naja Pallida {@universiteitleiden}. A study which got him published in Science!
+
+Snakes, as Jory once noted, are normally fairly sweet, but that doesn't mean their means of self-defense isn't harmful, if not lethal. In the laboratory, researchers are attempting to establish what makes the venom so lethal, as well as whether there are any benefits to the venom that could be used in the development of an anti-venom or the therapy of certain heart diseases {@Kazandjian2021}.
+Rat hearts were exposed to venom ex vivo in order to uncover a possible cure for excessive blood loss, specific cardiac diseases, and to find an anti-venom. This is accomplished using a Langendorff setup that includes a heart attached to the Langendorff and venom administered through a tube.
+
+This setup is done at the Institute of Life Sciences with venom from the Naja Pallida and the Crotalus atrox {@McKeller2002}. These venoms were tested on rat hearts ex vivo and human neuroblastoma cells (SKNAS) in vitro. When we look at the results in vitro, we can observe that cells deteriorate quickly. This effect is reduced when the inhibitor Varespladib is added {@Lewin2016}. For this reason the compound Varespladib is researched as a possible anti-dote {@Zinenko2020}.
+
+When considering the effect seen ex vivo, which means the venom is administered via the Langendorff setup, we can see the venom's effect on the heart, but we can also see the peak pattern that is formed. The reason for this is that when the rat's heart is removed, Ringer buffer is provided, causing the heart to beat somewhat longer than usual when taken from the body. When the venom is delivered, we can detect a peak pattern that indicates cardiac contractions. The researchers on the lab manually calculated data from the experiment, such as the number of peaks, maximal contraction force (the peak height), and beats per minute. The disadvantage is that the technique is extremely error-prone, and bias can readily creep in. This method is automated to avoid avoidable errors and save time for the researchers.
+
+I participated in this project with two other students, which was commissioned by the Institute of Life Sciences' Zoology department and was carried out under the supervision of Dr. Micheal Liem. 
+
+In R, a for loop was used to automate the peak identification process. We created a for-loop that examines the data file and determines if a peak is a peak by determining whether it has crossed a "hill." When you first enter the dataset, it will rise upwards with a peak before descending again. Every time the loop runs, it checks this procedure and records the number of peaks in a new file. In addition, another loop was created that calculates the beats per minute (bpm) during a 5-second period. This appears to be a very short time, but keep in mind that an experiment like this one typically lasts 30 to 45 minutes and that physiological consequences like cell degregation and blood clot development occur extremely quickly when exposed to snake venom.
+
+As with any experiment that produces peaks, we must also consider that some noise will be introduced. Noise is defined as peaks that appear on the graph but were not caused by the experiment. They were most likely caused by an analist accidentally bumping against the table, improper Langendorff setups, or any number of minor factors. To reduce the noise from the graph, we used a technique known as thresholding. This means that we examine a graph and determine how high the peaks are on average. This is the contraction force or strength. Peaks that are significantly smaller than the general peaks will not pass the threshold and will be filtered out.
+Sounds simple enough, doesn't it? Well, we discovered that the more experiments performed, the more different the peak graph may appear. Meaning, if an analist is jittery after his seventh cup of coffee and is having a clumsy day, significantly more noise will be noticed on the graph, and they may not all be the same height. Another explanation could be that a different setup was employed, or that the venom was used at a different concentration. 
+To provide the commissioning party with the most accurate information, we have chosen to let the analist chose the threshold for themself. This is done by writing a function in the loop which doesn't establish a fixed value as a threshold but rather lets the user choose it.
+
+Even while sometimes we forget the rest of the Institute for Life Sciences doesn't love the language R as much as we do, it did dawn on us that we couldn't simply hand in an R script and call it a day. For this reason we made a R Shiny app, which is an UI written purely with R and a little HTML and CSS for the look. In this app, the user will be presented with a README, and a page where they may upload the data file. The graphs will then be generated for them and they can afterwards choose a threshold.
+
+This is an ungoing project. Want to keep track? [Check out the project repo on GitHub](https://github.com/ProjecticumDataScience/dsfb2_project_regenworm)!
+
+Also check out my repository for the minor course I followed to see how I use bookdown to combine all my separate projects.

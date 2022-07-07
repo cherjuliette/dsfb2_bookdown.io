@@ -1,0 +1,136 @@
+# Dose Response Analysis of C. elegans
+
+*All truth is one. In this light may science and religion labor here together for the steady evolution of mankind; from darkness to light; from prejudice to tolerance; from narrowness to broadmindedness. It is the voice of life that calls us to come and learn.* ***(Edmund B. Hayes Hall, Buffalo University)***
+
+Science is not a static concept. It is just as dynamic as the world we live in. We are constantly presented with new research questions evident from the million papers that are published each year.
+
+So why is it that people claim there is a reproducility crisis in science?
+
+Reproducility is the concept that if a group of researcher want to determine what color the sky is, and they conclude with blue, the group of researcher who want to verify this conclusion should see results almost identical to their predecessors. So why is something that sounds so logical and simple rare? And why is it that reproducibility and transparancy became such a big deal only a few years ago?
+
+Well..while it cannot be explained away by some cynical reason, it can be agreed upon that errors can hide in the smallest corners. From contaminated pipet tips to a researcher who had forgotten to write down a certain step in the protocol.
+
+If a research is not reproducible, its conclusion must be disregarded. While Standford researcher Dr. John Loannidis claimed that the vast majority of research claims are false! A reason for reproducibility is that it benefits a company or institution. If the data gathered by a researcher or research group is openly assessisble (in the company at least), weak or faulty statements are more easily spotted and corrected. This makes a company self-sufficient, efficient and more trustworthy in the eyes of the public. A way of assuring reproducibility is by using the STAR method. STAR stands for Structured, Transparant, Accessible and Reporting. The method states that all data and analysis used for the research should be neatly organized in a clear file structure.
+See how I manage my files using the Guerilla Method on my portfolio!
+
+Many researchers have taken on the STAR method by changing their way of analysing. An example I will give you is a research by microbiologist and data scientist Riffomonas. In a research on global COVID-19 vaccination intent, he has shared his code and data with which he performed the analysis which I will duplicate. This analysis focuses on the global consensus on the COVID-19 vaccin in August 2020 to September 2020.
+
+```{r, include=FALSE, message=FALSE, warning=FALSE}
+if (!require(tidyverse)) install.packages("tidyverse")
+if (!require(ggplot2)) install.packages("ggplot2")     ## data visualization
+if (!require(janitor)) install.packages("janitor")       ## import excel files
+if (!require(ggtext)) install.packages("ggtext")       ## text modeling
+if (!require(readxl)) install.packages("readxl")       ## import excel files
+if (!require(dplyr)) install.packages("dplyr")         ## tidy data
+if (!require(glue)) install.packages("glue")
+```
+
+```{r riffomonas, warning=FALSE, message=FALSE}
+data <- read_csv(here::here("raw_data",
+                            "august_october_2020.csv")) %>%
+  rename(country = X.1,
+         percent_august = "Total Agree - August 2020",
+         percent_october = "Total Agree - October 2020") %>%
+  mutate(bump_august = if_else(percent_august < percent_october,
+                               percent_august - 2,
+                               percent_august + 2),
+         bump_october = if_else(percent_august < percent_october,
+                               percent_october + 2,
+                               percent_october - 2))
+
+main_plot <- data %>%
+  pivot_longer(cols = -country, names_to=c(".value", "month"),
+               names_sep = "_") %>%
+  mutate(country = factor(country, levels = rev(data$country))) %>%
+  ggplot(aes(x=percent, y=country, color=month)) +
+  geom_line(color="#e6e6e6", size=1.75, show.legend = FALSE) +
+  geom_point(size=2, show.legend = FALSE) +
+  geom_text(aes(label=glue("{percent}%"), x=bump),size=3, show.legend = FALSE) +
+  scale_color_manual(name=NULL,
+                     breaks=c("august", "october"),
+                     values=c("#727272", "#15607a"),
+                     labels=c("August", "October")) +
+  scale_x_continuous(limits=c(50, 100),
+                     breaks=seq(50, 100, by=5),
+                     labels=glue("{seq(50, 100, 5)}%")) +
+  labs(x=NULL, y=NULL,
+       title="If a vaccine for COVID-19 were available, I would get it",
+       caption="<i>Base: 18,526 online adults aged 16-74 across 15 countries</i><br>Source: Ipsos")+
+  theme(
+    plot.title.position = "plot",
+    plot.title = element_text(face="bold", margin= margin(b=20)),
+    plot.caption = element_markdown(hjust=0, color="darkgray"),
+    plot.caption.position = "plot",
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(color="darkgray"),
+    panel.grid.major.x = element_line(color="gray", size=0.1),
+    panel.grid.major.y = element_line(color="gray", size=0.1, linetype="dotted")
+  )
+
+total <- data %>%
+  filter(country == "Total") %>%
+  pivot_longer(cols = -country, names_to=c(".value", "month"),
+             names_sep = "_") %>%
+  mutate(pretty = if_else(month == "august",
+                          "Total Agree -<br>August 2020",
+                          "Total Agree -<br>October 2020"),
+         align = if_else(month == "august", 0, 1))
+
+main_plot +
+  coord_cartesian(clip="off") +
+  geom_textbox(data=total,
+               aes(x=percent, y =country, color=month, label=pretty, hjust=align),
+               size=2,
+               box.color=NA,
+               width=NULL,
+               vjust=-0.5,
+               box.padding=margin(0,0,0,0),
+               fill=NA,
+               show.legend=FALSE)
+
+ggsave("august_october_2020_ipsos.tiff", width=6, height=4)
+```
+
+Adaption 1: I had to change the working directory with the here package. 
+This is because I keep a separate file for all data. 
+
+In August, China showed the highest incentive for accepting a vaccine, before one was available. Following China, Brazil, Australia and India showed the highest motivation for getting a vaccine. Contrasting China, France showed most reluctance, closely followed by the United States and Italy.
+
+The analysis that I reproduced was entirely written by Riffomonas, who has a Youtube channel a website and a GitHub account where he shares his code. So, for the criteria of accessibility, author information and code availability he gets an A+.
+
+So, this seemed easy right? Someone shared a file and we run their code and rejoice when seeing a plot. But analysis like these are easier to replicate because their so small and because COVID-19 had such a overwhelming presence in the world that it was in everyone's best interest to share as much information as possible. In a sense, this was the first global group project. However, imagine if this was a standard research, in the lab and with code that we have to reproduce. That's much more difficult, let me show you why.
+
+From the Journal website I took the article Plasma ACE2 predicts outcome of COVID-19 in hospitalized patients written by Bibby, B.M.; et al. and attempted to replicate the code.
+The code may be downloaded in a zip-file, which contains two seperate files. Before downloaded you are helpfully redirected to a page which explains the content of each folder.
+
+Our body is made up of cells and it so happens that the cells in our lungs have receptors on the outside layer. The article explains that the COVID-19 virus binds to the angiotensin converting enzyme 2 (ACE2), the virus can more easily nestle in the body causing a more severe response in the person. The article tries to establish whether it can be predicted how sick people will become after infection, depending on the number of ACE enzymes present in plasma.
+
+In R, I imported the data file and attempted to reproduce the analysis. However the first problem I encountered was that the source data was not shared on the site. While many research groups have started to share their data, they often refrain from sharing source code making reproducibility more difficult to achieve.
+
+Nevertheless, I have attempted to visualize the data to the best of my ability and have then scored the study on reproducibility using the transparency criteria.
+
+Problems that I came across were:
+It seemed as if the README was missing, however descriptions of the variables were stored in an Excel sheet named Variable_descriptions_2021-04-27 which I at first mistook for the file containing the data.
+The source code was unavailable so I had to guess as to how I was meant to reproduce the analysis in R.
+The README does not contain metadata on the files. Before downloading the data, you are redirected to a page with descriptions on the files however if you download the files now but do the analysis in a few days you will have already forgotten precisely what the difference is between the files and will waste time having to look it up
+
+Just a disclaimer, this is in no way a criticism of the analists who did this research but I'm merely stating the issues I came across when duplicating the analysis.
+
+When considering the transparency criteria, I would score this research 5 out of 8 points.
+
+
+```{r data import2, message=FALSE, warning=FALSE}
+## import the  dataset
+df <- read_delim(here::here("raw_data/MGH_Olink_COVID_Apr_27_2021/MGH_COVID_Clinical_Info.txt"))
+
+## let's take a look
+head(df)
+
+```
+
+```{r clean data, message=FALSE, warning=FALSE}
+## clean names of the merged dataset
+#### default option is snake case
+janitor::clean_names(df)
+```
