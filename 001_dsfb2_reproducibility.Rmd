@@ -6,7 +6,7 @@ Science is not a static concept. It is just as dynamic as the world we live in. 
 
 So why is it that people claim there is a reproducility crisis in science?
 
-Reproducility is the concept that if a group of researcher want to determine what color the sky is, and they conclude with blue, the group of researcher who want to verify this conclusion should see results almost identical to their predecessors. So why is something that sounds so logical and simple rare? And why is it that reproducibility and transparancy became such a big deal only a few years ago?
+Reproduciblity is the concept that if a group of researcher want to determine what color the sky is, and they conclude with blue, the group of researcher who want to verify this conclusion should see results almost identical to their predecessors. So why is something that sounds so logical and simple rare? And why is it that reproducibility and transparancy became such a big deal only a few years ago?
 
 Well..while it cannot be explained away by some cynical reason, it can be agreed upon that errors can hide in the smallest corners. From contaminated pipet tips to a researcher who had forgotten to write down a certain step in the protocol.
 
