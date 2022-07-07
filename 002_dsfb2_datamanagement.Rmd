@@ -24,3 +24,4 @@ if (!require(fs)) install.packages("fs")
 fs::dir_tree(here::here())
 ```
 
+![Image of the directory tree of this pathway](./images/002_dir.png)
